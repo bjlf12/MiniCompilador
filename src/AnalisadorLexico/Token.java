@@ -26,4 +26,9 @@ public class Token {
         }
         return resultado;
     }
+
+    public String toString2() {
+        return String.format("%5d  %5d %-15s %s", this.linea, this.pos, this.tipoToken, this.valor);
+    }
+    
 }
