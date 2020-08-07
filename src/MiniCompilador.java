@@ -1,7 +1,9 @@
 import AnalisadorLexico.AnalixadorLexico;
+import AnalisadorSintactico.AnalisadorSintactico;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.Scanner;
 
 import static AnalisadorLexico.AnalixadorLexico.error;
@@ -18,7 +20,11 @@ public class MiniCompilador {
                     source += scanner.nextLine() + "\n";
                 }
                 AnalixadorLexico analixadorLexico = new AnalixadorLexico(source);
-                analixadorLexico.imprimirTokens();
+                //analixadorLexico.imprimirTokens();
+
+                //System.out.println(analixadorLexico.obtenerTokens());
+                AnalisadorSintactico analisadorSintactico = new AnalisadorSintactico(analixadorLexico.obtenerTokens());
+                analisadorSintactico.imprimirArbol(analisadorSintactico.parse());
             } catch(FileNotFoundException e) {
                 error(-1, -1, "Excepsión: " + e.getMessage());
             }

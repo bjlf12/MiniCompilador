@@ -1,8 +1,8 @@
 package AnalisadorLexico;
 
-import com.sun.corba.se.impl.oa.toa.TOA;
-
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class AnalixadorLexico {
@@ -11,7 +11,7 @@ public class AnalixadorLexico {
     private int posicion;
     private char chr;
     private String codigo;
-    Map<String, TipoToken> palabras = new HashMap<>();
+    private Map<String, TipoToken> palabras = new HashMap<>();
 
     public static void error(int linea, int pos, String mensaje) {
         if (linea > 0 && pos > 0) {
@@ -106,6 +106,16 @@ public class AnalixadorLexico {
             this.pos = 0;
         }
         return this.chr;
+    }
+
+    public List obtenerTokens() {
+        List<Token> listaToken = new ArrayList<Token>();
+        Token token;
+        while ((token = obtenerToken()).tipoToken != TipoToken.EOI) {
+            listaToken.add(token);
+        }
+        listaToken.add(token);
+        return listaToken;
     }
 
     public void imprimirTokens() {
