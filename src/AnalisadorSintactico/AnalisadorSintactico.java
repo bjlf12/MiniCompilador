@@ -53,7 +53,7 @@ public class AnalisadorSintactico {
         }
         else {
             error(this.token.linea, this.token.pos, "Esperando un primario, encontrado: " + this.token.tipoToken);
-         }
+        }
         while (this.token.tipoToken.isEsBinario() && this.token.tipoToken.getPrecedencia() >= precedencia) {
             tipoToken = this.token.tipoToken;
             obtenerSiguienteToken();
@@ -68,42 +68,31 @@ public class AnalisadorSintactico {
     }
     public Nodo exp_parentesis() {
         esperar("exp_parentesis", TipoToken.ParentesisIzquierdo);
-        Nodo node = expresion(0);
+        Nodo nodo = expresion(0);
         esperar("exp_parentesis", TipoToken.ParentesisDerecho);
-        return node;
+        return nodo;
     }
 
     public Nodo sentencia() {
-        Nodo n1, n2, n3, n4, n5, n6;
+        Nodo n1, n2;
         Nodo resultado = null;
         if (this.token.tipoToken == TipoToken.Imprime) {
-            n1 = Nodo.nuevaHoja(TipoNodo.nodo_Imprimir, "imprime");
             obtenerSiguienteToken();
 
-            n2 = Nodo.nuevaHoja(TipoNodo.nodo_Identificador, this.token.valor);
+            n1 = Nodo.nuevaHoja(TipoNodo.nodo_Identificador, this.token.valor);
             esperar("imprime", TipoToken.Identificador);
-
+            resultado = Nodo.nuevoNodo(TipoNodo.nodo_Imprimir, n1, null);
             esperar("imprime", TipoToken.PuntoComa);
-            n3 = Nodo.nuevaHoja(TipoNodo.nodo_PuntoComa, ";");
-
-            n4 = Nodo.nuevoNodo(TipoNodo.nodo_Imprimir, n2, n3);
-            resultado = Nodo.nuevoNodo(TipoNodo.nodo_Imprimir, n1, n4);
         }
         else if(this.token.tipoToken == TipoToken.Identificador) {
             n1 = Nodo.nuevaHoja(TipoNodo.nodo_Identificador, this.token.valor);
             obtenerSiguienteToken();
 
             esperar("asignacion", TipoToken.Asignacion);
-            n2 = Nodo.nuevaHoja(TipoNodo.nodo_Asignar, "=");
+            n2 = expresion(0);
 
-            n3 = expresion(0);
-
-            esperar("imprime", TipoToken.PuntoComa);
-            n4 = Nodo.nuevaHoja(TipoNodo.nodo_PuntoComa, ";");
-
-            n5 = Nodo.nuevoNodo(TipoNodo.nodo_Asignar, n3, n4);
-            n6 = Nodo.nuevoNodo(TipoNodo.nodo_Asignar, n2, n5);
-            resultado = Nodo.nuevoNodo(TipoNodo.nodo_Asignar, n1, n6);
+            resultado = Nodo.nuevoNodo(TipoNodo.nodo_Asignar, n1, n2);
+            esperar("asignacion", TipoToken.PuntoComa);
         }
         else {
             error(this.token.linea, this.token.pos, "Esperando el inicio de una declaracion, encontrado: " + this.token.tipoToken);
@@ -117,7 +106,7 @@ public class AnalisadorSintactico {
             obtenerSiguienteToken();
             return;
         }
-        error(this.token.linea, this.token.pos, mensaje + ": Esperada '" + tipoToken + "', found: '" + this.token.tipoToken + "'");
+        error(this.token.linea, this.token.pos, mensaje + ": Esperada '" + tipoToken + "', encontrado: '" + this.token.tipoToken + "'");
     }
 
     public Nodo parse() {
@@ -132,7 +121,7 @@ public class AnalisadorSintactico {
     public void imprimirArbol(Nodo nodo) {
         int i = 0;
         if (nodo == null){
-            //System.out.println("kaka");
+            System.out.println(";");
         } else {
             System.out.printf("%-14s", nodo.tipoNodo);
             if (nodo.tipoNodo == TipoNodo.nodo_Identificador || nodo.tipoNodo == TipoNodo.nodo_Digito) {
