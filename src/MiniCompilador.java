@@ -1,9 +1,10 @@
 import AnalisadorLexico.AnalixadorLexico;
+import AnalisadorSemantico.AnalisadorSemantico;
 import AnalisadorSintactico.AnalisadorSintactico;
+import AnalisadorSintactico.Nodo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.List;
 import java.util.Scanner;
 
 import static AnalisadorLexico.AnalixadorLexico.error;
@@ -24,7 +25,8 @@ public class MiniCompilador {
 
                 //System.out.println(analixadorLexico.obtenerTokens());
                 AnalisadorSintactico analisadorSintactico = new AnalisadorSintactico(analixadorLexico.obtenerTokens());
-                analisadorSintactico.imprimirArbol(analisadorSintactico.parse());
+                Nodo raiz = analisadorSintactico.parse();
+                AnalisadorSemantico analisadorSemantico = new AnalisadorSemantico(raiz);
             } catch(FileNotFoundException e) {
                 error(-1, -1, "Excepsión: " + e.getMessage());
             }

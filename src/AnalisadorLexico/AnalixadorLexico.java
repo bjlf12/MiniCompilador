@@ -80,16 +80,34 @@ public class AnalixadorLexico {
         pos = this.pos;
 
         switch (this.chr) {
-            case '\u0000': return new Token(TipoToken.EOI, "", this.linea, this.pos);
-            case '(': obtenerSiguienteCaracter(); return new Token(TipoToken.ParentesisIzquierdo, "", linea, pos);
-            case ')': obtenerSiguienteCaracter(); return new Token(TipoToken.ParentesisDerecho, "", linea, pos);
-            case '=': obtenerSiguienteCaracter(); return new Token(TipoToken.Asignacion, "", linea, pos);
-            case '+': obtenerSiguienteCaracter(); return new Token(TipoToken.ExprecionSum, "", linea, pos);
-            case '–': obtenerSiguienteCaracter(); return new Token(TipoToken.ExpresionRes, "", linea, pos);
-            case '*': obtenerSiguienteCaracter(); return new Token(TipoToken.TerminoMult, "", linea, pos);
-            case '/': obtenerSiguienteCaracter(); return new Token(TipoToken.TerminoDiv, "", linea, pos);
-            case ';': obtenerSiguienteCaracter(); return new Token(TipoToken.PuntoComa, "", linea, pos);
-            default: return identificadorODigito(linea, pos);
+            case '\u0000':
+                return new Token(TipoToken.EOI, "", this.linea, this.pos);
+            case '(':
+                obtenerSiguienteCaracter();
+                return new Token(TipoToken.ParentesisIzquierdo, "", linea, pos);
+            case ')':
+                obtenerSiguienteCaracter();
+                return new Token(TipoToken.ParentesisDerecho, "", linea, pos);
+            case '=':
+                obtenerSiguienteCaracter();
+                return new Token(TipoToken.Asignacion, "", linea, pos);
+            case '+':
+                obtenerSiguienteCaracter();
+                return new Token(TipoToken.ExprecionSum, "", linea, pos);
+            case '-':
+                obtenerSiguienteCaracter();
+                return new Token(TipoToken.ExpresionRes, "", linea, pos);
+            case '*':
+                obtenerSiguienteCaracter();
+                return new Token(TipoToken.TerminoMult, "", linea, pos);
+            case '/':
+                obtenerSiguienteCaracter();
+                return new Token(TipoToken.TerminoDiv, "", linea, pos);
+            case ';':
+                obtenerSiguienteCaracter();
+                return new Token(TipoToken.PuntoComa, "", linea, pos);
+            default:
+                return identificadorODigito(linea, pos);
         }
     }
 
