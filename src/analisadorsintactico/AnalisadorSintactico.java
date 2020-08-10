@@ -1,7 +1,7 @@
-package AnalisadorSintactico;
+package analisadorsintactico;
 
-import AnalisadorLexico.TipoToken;
-import AnalisadorLexico.Token;
+import analisadorlexico.TipoToken;
+import analisadorlexico.Token;
 
 import java.util.List;
 
@@ -34,16 +34,17 @@ public class AnalisadorSintactico {
         Nodo resultado = null, nodo;
         TipoToken tipoToken;
         int q;
-        if(this.token.tipoToken == TipoToken.ParentesisIzquierdo) {
+        if (this.token.tipoToken == TipoToken.ParentesisIzquierdo) {
             resultado = exp_parentesis();
-        }
-        else if (this.token.tipoToken == TipoToken.ExprecionSum || this.token.tipoToken == TipoToken.ExpresionRes) {
+        } else if (this.token.tipoToken == TipoToken.ExprecionSum || this.token.tipoToken == TipoToken.ExpresionRes) {//todo Añadir qwue no se puedan agregar varios + o - seguidos.
             tipoToken = (this.token.tipoToken == TipoToken.ExpresionRes) ? TipoToken.ExpresionRes : TipoToken.ExprecionSum;
             obtenerSiguienteToken();
+            if (this.token.tipoToken != TipoToken.Digito || this.token.tipoToken != TipoToken.Identificador || this.token.tipoToken != TipoToken.ParentesisIzquierdo) {
+                error(this.token.linea, this.posicion, "Encontrado un signo repetido");
+            }
             nodo = expresion(TipoToken.ExpresionRes.getPrecedencia());
             resultado = (tipoToken == TipoToken.ExpresionRes) ? Nodo.nuevoNodo(TipoNodo.nodo_Rest, nodo) : nodo;
-        }
-        else if (this.token.tipoToken == TipoToken.Identificador) {
+        } else if (this.token.tipoToken == TipoToken.Identificador) {
             resultado = Nodo.nuevaHoja(TipoNodo.nodo_Identificador, this.token.valor);
             obtenerSiguienteToken();
         }

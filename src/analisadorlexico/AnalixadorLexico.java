@@ -1,4 +1,4 @@
-package AnalisadorLexico;
+package analisadorlexico;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +15,7 @@ public class AnalixadorLexico {
 
     public static void error(int linea, int pos, String mensaje) {
         if (linea > 0 && pos > 0) {
-            System.out.printf("%s en la linea %d, posición %d\n", mensaje, linea, pos);
+            System.out.printf("%s en la línea %d, posición %d\n", mensaje, linea, pos);
         } else {
             System.out.println(mensaje);
         }
@@ -31,13 +31,13 @@ public class AnalixadorLexico {
         this.palabras.put("imprime", TipoToken.Imprime);
     }
 
-    public Token follow(char esperar, TipoToken sies, TipoToken sino, int linea, int pos) {
+    public Token siguiente(char esperar, TipoToken sies, TipoToken sino, int linea, int pos) {
         if (obtenerSiguienteCaracter() == esperar) {
             obtenerSiguienteCaracter();
-            return  new Token(sies, "", linea, pos);
+            return new Token(sies, "", linea, pos);
         }
         if (sino == TipoToken.EOI) {
-            error(linea, pos, String.format("Siguiente: caracter inreconocido (%d) '%c'", (int)this.chr, this.chr));
+            error(linea, pos, String.format("Siguiente: carácter irreconocible (%d) '%c'", (int) this.chr, this.chr));
         }
         return new Token(sino, "", linea, pos);
     }
@@ -55,7 +55,7 @@ public class AnalixadorLexico {
         }
 
         if (texto.equals("")) {
-            error(linea, pos, String.format("Caracter inreconocible: (%d) %c", (int)this.chr, this.chr));
+            error(linea, pos, String.format("Carácter inrreconocible: (%d) %c", (int) this.chr, this.chr));
         }
 
         if (Character.isDigit(texto.charAt(0))) {

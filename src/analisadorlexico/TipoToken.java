@@ -1,6 +1,6 @@
-package AnalisadorLexico;
+package analisadorlexico;
 
-import AnalisadorSintactico.TipoNodo;
+import analisadorsintactico.TipoNodo;
 
 public enum TipoToken {
     EOI(false, false, false, -1, TipoNodo.nodo_Nada), TerminoMult(false, true, false, 13, TipoNodo.nodo_Mult),  TerminoDiv(false, true, false, 13, TipoNodo.nodo_Div), ExprecionSum(false, true, false, 12, TipoNodo.nodo_Sum), ExpresionRes(false, true, false, 12, TipoNodo.nodo_Rest),

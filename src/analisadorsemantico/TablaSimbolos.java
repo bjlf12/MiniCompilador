@@ -1,7 +1,7 @@
-package AnalisadorSemantico;
+package analisadorsemantico;
 
-import AnalisadorSintactico.Nodo;
-import AnalisadorSintactico.TipoNodo;
+import analisadorsintactico.Nodo;
+import analisadorsintactico.TipoNodo;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -81,7 +81,7 @@ public class TablaSimbolos {
         Set<String> identificadores = tabla.keySet();
         for (String i : identificadores
         ) {
-            System.out.println(i + "  " + tabla.get(i));
+            System.out.println("|identificador: " + i + " | valor:" + tabla.get(i) + "|");
         }
     }
 

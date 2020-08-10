@@ -1,7 +1,7 @@
-package AnalisadorSemantico;
+package analisadorsemantico;
 
-import AnalisadorSintactico.Nodo;
-import AnalisadorSintactico.TipoNodo;
+import analisadorsintactico.Nodo;
+import analisadorsintactico.TipoNodo;
 
 public class AnalisadorSemantico {
     private TablaSimbolos tablaSimbolos;
@@ -10,8 +10,6 @@ public class AnalisadorSemantico {
     public AnalisadorSemantico(Nodo nodo) {
         this.tablaSimbolos = TablaSimbolos.obtenerInstancia();
         this.nodo = nodo;
-        recorrerArbol(this.nodo);
-        //tablaSimbolos.imprimirTabla();
     }
 
     public void recorrerArbol(Nodo nodo) {
@@ -28,4 +26,7 @@ public class AnalisadorSemantico {
         }
     }
 
+    public TablaSimbolos getTablaSimbolos() {
+        return tablaSimbolos;
+    }
 }
