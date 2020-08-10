@@ -11,7 +11,6 @@ public class GeneradorCodigo {
     private static Map<String, TipoNodo> stringTipoNodo = new HashMap<>();
     private static List<String> variables = new ArrayList<>();
     private static int contadorVariables = 0;
-    private Scanner scanner;
 
     private static TipoNodo[] operadores = {
             TipoNodo.nodo_Rest, TipoNodo.nodo_Sum, TipoNodo.nodo_Div, TipoNodo.nodo_Mult
@@ -96,7 +95,7 @@ public class GeneradorCodigo {
                 break;
             case nodo_Imprimir:
                 generarCodigo(raiz.izquiendo);
-                emitirByte(Mnemonico.PRTI);
+                emitirByte(Mnemonico.IMPR);
                 break;
             default:
                 if (arrayContiene(operadores, raiz.tipoNodo)) {
@@ -136,7 +135,7 @@ public class GeneradorCodigo {
                 case SUB:
                 case MUL:
                 case DIV:
-                case PRTI:
+                case IMPR:
                 case HALT:
                     System.out.print(operador.toString().toLowerCase());
                     break;
@@ -155,36 +154,6 @@ public class GeneradorCodigo {
             }
             System.out.println();
         }
-    }
-
-    public Nodo cargarAst() throws Exception {
-        String commando, valor;
-        String line;
-        Nodo izquierdo, derecho;
-
-        while (scanner.hasNext()) {
-            line = scanner.nextLine();
-            valor = null;
-            if (line.length() > 16) {
-                commando = line.substring(0, 15).trim();
-                valor = line.substring(15).trim();
-            } else {
-                commando = line.trim();
-            }
-            if (commando.equals(";")) {
-                return null;
-            }
-            if (!stringTipoNodo.containsKey(commando)) {
-                throw new Exception("Comando desconocido: '" + commando + "'");
-            }
-            if (valor != null) {
-                return Nodo.nuevaHoja(stringTipoNodo.get(commando), valor);
-            }
-            izquierdo = cargarAst();
-            derecho = cargarAst();
-            return Nodo.nuevoNodo(stringTipoNodo.get(commando), izquierdo, derecho);
-        }
-        return null;
     }
 
 }

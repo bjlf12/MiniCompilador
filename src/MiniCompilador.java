@@ -2,7 +2,6 @@ import analisadorlexico.AnalixadorLexico;
 import analisadorsemantico.AnalisadorSemantico;
 import analisadorsintactico.AnalisadorSintactico;
 import analisadorsintactico.Nodo;
-import generadorcodigo.GeneradorCodigo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,12 +31,12 @@ public class MiniCompilador {
                 analisadorSemantico.recorrerArbol(raiz);
                 //analisadorSemantico.getTablaSimbolos().imprimirTabla();
 
-                GeneradorCodigo generadorCodigo = new GeneradorCodigo();
-                generadorCodigo.generarCodigo(raiz);
+                /**GeneradorCodigo generadorCodigo = new GeneradorCodigo();
+                 generadorCodigo.generarCodigo(raiz);**/
             } catch (FileNotFoundException e) {
                 error(-1, -1, "Excepción: " + e.getMessage());
             } catch (Exception e) {
-                System.out.println("Excepción: " + e.getMessage());
+                error(-1, -1, "Excepción: " + e.getMessage());
             }
         } else {
             error(-1, -1, "Entrada invalida");

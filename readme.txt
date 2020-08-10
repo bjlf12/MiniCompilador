@@ -1,4 +1,3 @@
-# MiniCompilador
 Autores: 
 Kenneth Rodríguez Murillo
 Walter Morales Vásquez

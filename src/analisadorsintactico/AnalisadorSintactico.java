@@ -35,7 +35,7 @@ public class AnalisadorSintactico {
         TipoToken tipoToken;
         int q;
         if (this.token.tipoToken == TipoToken.ParentesisIzquierdo) {
-            resultado = exp_parentesis();
+            resultado = expParentesis();
         } else if (this.token.tipoToken == TipoToken.ExprecionSum || this.token.tipoToken == TipoToken.ExpresionRes) {//todo Añadir qwue no se puedan agregar varios + o - seguidos.
             tipoToken = (this.token.tipoToken == TipoToken.ExpresionRes) ? TipoToken.ExpresionRes : TipoToken.ExprecionSum;
             obtenerSiguienteToken();
@@ -65,9 +65,10 @@ public class AnalisadorSintactico {
             nodo = expresion(q);
             resultado = Nodo.nuevoNodo(tipoToken.getTipoNodo(), resultado, nodo);
         }
-        return  resultado;
+        return resultado;
     }
-    public Nodo exp_parentesis() {
+
+    public Nodo expParentesis() {
         esperar("exp_parentesis", TipoToken.ParentesisIzquierdo);
         Nodo nodo = expresion(0);
         esperar("exp_parentesis", TipoToken.ParentesisDerecho);
