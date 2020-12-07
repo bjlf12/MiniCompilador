@@ -1,7 +1,7 @@
-package analisadorsemantico;
+package AnalizadorSemantico;
 
-import analisadorsintactico.Nodo;
-import analisadorsintactico.TipoNodo;
+import AnalizadorSintactico.Nodo;
+import AnalizadorSintactico.TipoNodo;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,13 +1,13 @@
-import analisadorlexico.AnalixadorLexico;
-import analisadorsemantico.AnalisadorSemantico;
-import analisadorsintactico.AnalisadorSintactico;
-import analisadorsintactico.Nodo;
+import Analizadorlexico.AnalizadorLexico;
+import AnalizadorSemantico.AnalizadorSemantico;
+import AnalizadorSintactico.AnalizadorSintactico;
+import AnalizadorSintactico.Nodo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import static analisadorlexico.AnalixadorLexico.error;
+import static Analizadorlexico.AnalizadorLexico.error;
 
 public class MiniCompilador {
     public static void main(String[] args) {
@@ -19,16 +19,16 @@ public class MiniCompilador {
                 while (scanner.hasNext()) {
                     codigo += scanner.nextLine() + "\n";
                 }
-                AnalixadorLexico analixadorLexico = new AnalixadorLexico(codigo);
+                AnalizadorLexico analizadorLexico = new AnalizadorLexico(codigo);
                 //analixadorLexico.imprimirTokens();
 
                 //System.out.println(analixadorLexico.obtenerTokens());
-                AnalisadorSintactico analisadorSintactico = new AnalisadorSintactico(analixadorLexico.obtenerTokens());
-                Nodo raiz = analisadorSintactico.parse();
+                AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(analizadorLexico.obtenerTokens());
+                Nodo raiz = analizadorSintactico.parse();
                 //analisadorSintactico.imprimirArbol(raiz);
 
-                AnalisadorSemantico analisadorSemantico = new AnalisadorSemantico(raiz);
-                analisadorSemantico.recorrerArbol(raiz);
+                AnalizadorSemantico analizadorSemantico = new AnalizadorSemantico(raiz);
+                analizadorSemantico.recorrerArbol(raiz);
                 //analisadorSemantico.getTablaSimbolos().imprimirTabla();
 
                 /**GeneradorCodigo generadorCodigo = new GeneradorCodigo();

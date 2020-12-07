@@ -1,4 +1,4 @@
-package analisadorlexico;
+package Analizadorlexico;
 
 public class Token {
     public TipoToken tipoToken;

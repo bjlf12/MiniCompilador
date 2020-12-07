@@ -1,13 +1,13 @@
-package analisadorsemantico;
+package AnalizadorSemantico;
 
-import analisadorsintactico.Nodo;
-import analisadorsintactico.TipoNodo;
+import AnalizadorSintactico.Nodo;
+import AnalizadorSintactico.TipoNodo;
 
-public class AnalisadorSemantico {
+public class AnalizadorSemantico {
     private TablaSimbolos tablaSimbolos;
     private Nodo nodo;
 
-    public AnalisadorSemantico(Nodo nodo) {
+    public AnalizadorSemantico(Nodo nodo) {
         this.tablaSimbolos = TablaSimbolos.obtenerInstancia();
         this.nodo = nodo;
     }

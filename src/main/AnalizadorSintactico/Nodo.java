@@ -1,4 +1,4 @@
-package analisadorsintactico;
+package AnalizadorSintactico;
 
 public class Nodo {
     public TipoNodo tipoNodo;

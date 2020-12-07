@@ -1,6 +1,6 @@
-package analisadorsintactico;
+package AnalizadorSintactico;
 
-import generadorcodigo.Mnemonico;
+import GeneradorCodigo.Mnemonico;
 
 public enum TipoNodo {
     nodo_Nada("", Mnemonico.NONE), nodo_Mult("Multiplicacion", Mnemonico.MUL), nodo_Div("Division", Mnemonico.DIV), nodo_Sum("Suma", Mnemonico.ADD), nodo_Rest("Resta", Mnemonico.SUB),

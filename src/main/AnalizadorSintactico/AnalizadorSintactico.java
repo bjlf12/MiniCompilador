@@ -1,11 +1,11 @@
-package analisadorsintactico;
+package AnalizadorSintactico;
 
-import analisadorlexico.TipoToken;
-import analisadorlexico.Token;
+import Analizadorlexico.TipoToken;
+import Analizadorlexico.Token;
 
 import java.util.List;
 
-public class AnalisadorSintactico {
+public class AnalizadorSintactico {
     private List<Token> tokens;
     private Token token;
     private int posicion;
@@ -19,7 +19,7 @@ public class AnalisadorSintactico {
         System.exit(1);
     }
 
-    public AnalisadorSintactico (List<Token> tokens){
+    public AnalizadorSintactico(List<Token> tokens){
         this.tokens = tokens;
         this.token = null;
         this.posicion = 0;

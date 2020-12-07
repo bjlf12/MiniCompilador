@@ -1,11 +1,11 @@
-package analisadorlexico;
+package Analizadorlexico;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class AnalixadorLexico {
+public class AnalizadorLexico {
     private int linea;
     private int pos;
     private int posicion;
@@ -22,7 +22,7 @@ public class AnalixadorLexico {
         System.exit(1);
     }
 
-    public AnalixadorLexico (String codigo) {
+    public AnalizadorLexico(String codigo) {
         this.linea = 1;
         this.pos = 0;
         this.posicion = 0;
