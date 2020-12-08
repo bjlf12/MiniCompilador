@@ -19,7 +19,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AnalizadorSintacticoTest {
 
-
     //Variables para capturar la impresion en consola en los tests.
     private final ByteArrayOutputStream out = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
@@ -60,6 +59,7 @@ class AnalizadorSintacticoTest {
         analizadorSintactico.imprimirArbol(nodo_raiz);
     }
 
+
     // Test que compara el arbol creado manualmente con el generado en la prueba.
     @Test
     void correctitud_del_arbol_generado_en_la_fase_sintactica() {
@@ -79,6 +79,14 @@ class AnalizadorSintacticoTest {
                 "Id             x\r\n" +
                 "Digito         50\r\n",out.toString());
     }
+
+    // Test que compara el un nombre del nodo arbol creado manualmente con el generado en la prueba.
+    @Test
+    void correctitud_del_nombre_nodo_arbol_fase_sintactica() {
+        String lines[] = out.toString().split("\\r?\\n");
+        assertEquals("Digito",lines[14].split("\\s+")[0]);
+    }
+
     // Libera variables que se utiliza para probar la impresion en consola.
     @AfterEach
     public void restoreInitialStreams() {
