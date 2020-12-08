@@ -59,6 +59,27 @@ class AnalizadorSintacticoTest {
         analizadorSintactico.imprimirArbol(nodo_raiz);
     }
 
+
+    // Test que compara el arbol creado manualmente con el generado en la prueba.
+    @Test
+    void correctitud_del_arbol_generado_en_la_fase_sintactica() {
+        assertEquals("Declaracion   \r\n" +
+                "Declaracion   \r\n" +
+                ";\r\n" +
+                "Asignar       \r\n" +
+                "Id             x\r\n" +
+                "Digito         50\r\n" +
+                "Asignar       \r\n" +
+                "Id             z\r\n" +
+                "Suma          \r\n" +
+                "Digito         300\r\n" +
+                "Multiplicacion\r\n" +
+                "Digito         10\r\n" +
+                "Resta         \r\n" +
+                "Id             x\r\n" +
+                "Digito         50\r\n",out.toString());
+    }
+
     // Test que compara el un nombre del nodo arbol creado manualmente con el generado en la prueba.
     @Test
     void correctitud_del_nombre_nodo_arbol_fase_sintactica() {
