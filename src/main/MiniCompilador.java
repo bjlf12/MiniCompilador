@@ -31,7 +31,7 @@ public class MiniCompilador {
 
                 AnalizadorSemantico analizadorSemantico = new AnalizadorSemantico(raiz);
                 analizadorSemantico.recorrerArbol(raiz);
-                analizadorSemantico.getTablaSimbolos().imprimirTabla();
+                //analizadorSemantico.getTablaSimbolos().imprimirTabla();
 
                 /**GeneradorCodigo generadorCodigo = new GeneradorCodigo();
                  generadorCodigo.generarCodigo(raiz);**/
