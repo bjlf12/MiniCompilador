@@ -60,6 +60,13 @@ class AnalizadorSintacticoTest {
     }
 
 
+    // Test que compara el un valor del nodo arbol creado manualmente con el generado en la prueba.
+    @Test
+    void correctitud_del_valor_nodo_arbol_fase_sintactica() {
+        String lines[] = out.toString().split("\\r?\\n");
+        assertEquals("50",lines[14].split("\\s+")[1]);
+
+
     // Test que compara el arbol creado manualmente con el generado en la prueba.
     @Test
     void correctitud_del_arbol_generado_en_la_fase_sintactica() {
@@ -85,6 +92,7 @@ class AnalizadorSintacticoTest {
     void correctitud_del_nombre_nodo_arbol_fase_sintactica() {
         String lines[] = out.toString().split("\\r?\\n");
         assertEquals("Digito",lines[14].split("\\s+")[0]);
+
     }
 
     // Libera variables que se utiliza para probar la impresion en consola.
