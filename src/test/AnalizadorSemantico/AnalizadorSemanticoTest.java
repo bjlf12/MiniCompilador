@@ -47,7 +47,7 @@ class AnalizadorSemanticoTest {
         ) {
             System.out.println("identificador: " + i);
         }
-        assertEquals("identificador: a\r\nidentificador: b\r\nidentificador: c\r\nidentificador: d\r\nidentificador: f\r\n",outContent.toString());
+        assertEquals("identificador: a\nidentificador: b\nidentificador: c\nidentificador: d\nidentificador: f\n",outContent.toString());
     }
 
     @Test
@@ -58,6 +58,6 @@ class AnalizadorSemanticoTest {
         ) {
             System.out.println("valor: " + analizadorSemantico.getTablaSimbolos().getTabla().get(i));
         }
-        assertEquals("valor: 2\r\nvalor: 5\r\nvalor: 10\r\nvalor: 10\r\nvalor: 270000\r\n",outContent.toString());
+        assertEquals("valor: 2\nvalor: 5\nvalor: 10\nvalor: 10\nvalor: 270000\n",outContent.toString());
     }
 }
