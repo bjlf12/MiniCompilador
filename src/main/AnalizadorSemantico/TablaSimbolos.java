@@ -21,6 +21,7 @@ public class TablaSimbolos {
             tablaSimbolos = new TablaSimbolos();
         }
         return tablaSimbolos;
+
     }
 
     public void error(String mensaje, Nodo nodo) {
