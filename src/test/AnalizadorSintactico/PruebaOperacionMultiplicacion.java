@@ -29,9 +29,9 @@ public class PruebaOperacionMultiplicacion {
         AnalizadorSemantico analizadorSemantico = new AnalizadorSemantico(raiz);
         analizadorSemantico.recorrerArbol(raiz);
     }
-    // Test que compara el valor del resultado de la suma generado por el codigo con el correcto.
+    // Test que compara el valor del resultado de la multiplicacion generado por el codigo con el correcto.
     @Test
-    public void correctitud_valor_resultado_suma_fase_semantica() {
+    public void correctitud_valor_resultado_multiplicacion_fase_semantica() {
         String lines[] = out.toString().split("\\r?\\n");
         assertEquals("10000",lines[0]);
     }
