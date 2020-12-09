@@ -40,21 +40,27 @@ class AnalizadorSemanticoTest {
     // Intenta crear un arbol con 5000 nodos y espera un StackOverFlowError.
     @Test
     public void pruebaEstresCon10000ValoresParatabladeSimbolos(){
-        Assertions.assertThrows(StackOverflowError.class, () -> {
+        boolean error = true;
+        try {
             StringBuilder input = new StringBuilder(10000);
-            for(int i = 0; i<10000; i++){
-                input.append("a"+i+" = 2;\n");
+            for (int i = 0; i < 5000; i++) {
+                input.append("a" + i + " = 2;\n");
             }
             AnalizadorLexico analizadorLexico = new AnalizadorLexico(input.toString());
             AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(analizadorLexico.obtenerTokens());
             Nodo raiz = analizadorSintactico.parse();
             AnalizadorSemantico analizadorSemantico = new AnalizadorSemantico(raiz);
             analizadorSemantico.recorrerArbol(raiz);
-            analizadorSemantico.getTablaSimbolos().imprimirTabla();
-        });
-
+        }catch (RuntimeException e){
+            error = false;
+        }
+        assertTrue(error);
 
     }
+
+
+
+
 
     // Libera variables que se utilizan para probar la impresion en consola.
     @AfterEach
