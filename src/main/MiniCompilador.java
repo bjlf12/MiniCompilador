@@ -19,8 +19,11 @@ public class MiniCompilador {
                 while (scanner.hasNext()) {
                     codigo += scanner.nextLine() + "\n";
                 }
+
                 AnalizadorLexico analizadorLexico = new AnalizadorLexico(codigo);
+
                 //analizadorLexico.imprimirTokens();
+
 
                 //System.out.println(analizadorLexico.obtenerTokens());
                 AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(analizadorLexico.obtenerTokens());
@@ -29,7 +32,6 @@ public class MiniCompilador {
                 AnalizadorSemantico analizadorSemantico = new AnalizadorSemantico(raiz);
                 analizadorSemantico.recorrerArbol(raiz);
                 //analizadorSemantico.getTablaSimbolos().imprimirTabla();
-
 
                 /**GeneradorCodigo generadorCodigo = new GeneradorCodigo();
                  generadorCodigo.generarCodigo(raiz);**/

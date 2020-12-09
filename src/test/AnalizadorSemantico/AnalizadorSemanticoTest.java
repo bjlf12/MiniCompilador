@@ -2,6 +2,7 @@ package AnalizadorSemantico;
 
 import AnalizadorSintactico.AnalizadorSintactico;
 
+
 import AnalizadorSintactico.Nodo;
 import Analizadorlexico.AnalizadorLexico;
 import org.junit.jupiter.api.AfterEach;
@@ -17,6 +18,7 @@ import java.util.Scanner;
 
 import static Analizadorlexico.AnalizadorLexico.error;
 
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AnalizadorSemanticoTest {
@@ -26,7 +28,9 @@ class AnalizadorSemanticoTest {
     private final PrintStream originalOut = System.out;
 
     private AnalizadorSemantico analizadorSemantico;
+
     private Nodo raiz;
+
 
 
     @BeforeEach
@@ -40,6 +44,7 @@ class AnalizadorSemanticoTest {
         analizadorSemantico.recorrerArbol(raiz);
         System.setOut(new PrintStream(outContent));
 
+
     }
 
     @AfterEach
@@ -48,6 +53,11 @@ class AnalizadorSemanticoTest {
     }
 
     @Test
+
+    void recorrerArbol() {
+        analizadorSemantico.getTablaSimbolos().imprimirTabla();
+        assertEquals("|identificador: w | valor:-51|\r\n|identificador: x | valor:100|\r\n|identificador: z | valor:-5140|\r\n",outContent.toString());
+
     void retornarColumnaIndentificadoresDadasLasEntradas() {
 
         Set<String> identificadores = analizadorSemantico.getTablaSimbolos().getTabla().keySet();
@@ -111,6 +121,6 @@ class AnalizadorSemanticoTest {
     @AfterEach
     public void restoreInitialStreams() {
         System.setOut(originalOut);
-r
+
     }
 }
