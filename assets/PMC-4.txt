@@ -1,0 +1,6 @@
+x = 100 ;
+z = 300 + ( 10 - (x + 9) * 50 ) ;
+w = z / x ;
+impriee x;
+imprime z;
+imprime w;
