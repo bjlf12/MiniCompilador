@@ -24,6 +24,7 @@ class AnalizadorSintacticoTest {
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
 
+
     // Se utiliza para crear el arbol de nodos que se utilizara para imprimirlo y probar en los tests.
     @BeforeEach
     public void setUp() {
@@ -60,6 +61,7 @@ class AnalizadorSintacticoTest {
     }
 
 
+
     // Test que compara el valor de un nodo del arbol creado manualmente con el generado en la prueba.
     @Test
     public void correctitud_del_valor_nodo_arbol_fase_sintactica() {
@@ -68,11 +70,9 @@ class AnalizadorSintacticoTest {
 
     }
 
-    
     // Test que compara el arbol creado manualmente con el generado en la prueba.
     @Test
     public void correctitud_del_arbol_generado_en_la_fase_sintactica() {
-
         assertEquals("Declaracion   \r\n" +
                 "Declaracion   \r\n" +
                 ";\r\n" +
@@ -89,6 +89,25 @@ class AnalizadorSintacticoTest {
                 "Id             x\r\n" +
                 "Digito         50\r\n", out.toString());
     }
+
+
+    // Test para verificar que el nodo siguiente en una operacion es el correcto
+    @Test
+    void nodo_siguiente_correcto(){
+        String lines[] = out.toString().split("\\r?\\n");
+        int u = 0;
+        while (u < lines.length){
+            if (lines[u] == ";"){
+                assertEquals("Asignar",lines[u + 1].split("\\s+")[0]);
+            }
+            else if (lines[u] == "Asignar"){
+                assertEquals("Id",lines[u + 1].split("\\s+")[0]);
+            }
+            else if (lines[u] == "Id"){
+                assertEquals("Digito",lines[u + 1].split("\\s+")[0]);
+            }
+            u ++;
+        }
 
     // Test que compara el nombre de un nodo del arbol creado manualmente con el generado en la prueba.
     @Test
@@ -114,12 +133,13 @@ class AnalizadorSintacticoTest {
         });
 
 
+
     }
 
     // Libera variables que se utiliza para probar la impresion en consola.
     @AfterEach
 
-    public void restoreInitialStreams(){
+    public void restoreInitialStreams () {
 
         System.setOut(originalOut);
         System.setErr(originalErr);
@@ -127,3 +147,4 @@ class AnalizadorSintacticoTest {
 
 
 }
+
