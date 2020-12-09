@@ -4,6 +4,7 @@ import AnalizadorSintactico.AnalizadorSintactico;
 import AnalizadorSintactico.Nodo;
 import Analizadorlexico.AnalizadorLexico;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -34,6 +35,25 @@ class AnalizadorSemanticoTest {
     public void correctitud_valor_resultado_suma_fase_semantica() {
         String lines[] = out.toString().split("\\r?\\n");
         assertEquals("325",lines[0]);
+    }
+
+    // Intenta crear un arbol con 5000 nodos y espera un StackOverFlowError.
+    @Test
+    public void pruebaEstresCon10000ValoresParatabladeSimbolos(){
+        Assertions.assertThrows(StackOverflowError.class, () -> {
+            StringBuilder input = new StringBuilder(10000);
+            for(int i = 0; i<10000; i++){
+                input.append("a"+i+" = 2;\n");
+            }
+            AnalizadorLexico analizadorLexico = new AnalizadorLexico(input.toString());
+            AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(analizadorLexico.obtenerTokens());
+            Nodo raiz = analizadorSintactico.parse();
+            AnalizadorSemantico analizadorSemantico = new AnalizadorSemantico(raiz);
+            analizadorSemantico.recorrerArbol(raiz);
+            analizadorSemantico.getTablaSimbolos().imprimirTabla();
+        });
+
+
     }
 
     // Libera variables que se utilizan para probar la impresion en consola.
