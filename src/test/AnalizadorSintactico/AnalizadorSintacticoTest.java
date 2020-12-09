@@ -26,22 +26,22 @@ class AnalizadorSintacticoTest {
 
     // Se utiliza para crear el arbol de nodos que se utilizara para imprimirlo y probar.
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         System.setOut(new PrintStream(out));
-        Nodo nodo13 = new Nodo(TipoNodo.nodo_Identificador,null,null,"x");
-        Nodo nodo12 = new Nodo(TipoNodo.nodo_Digito,null,null,"50");
-        Nodo nodo11 = new Nodo(TipoNodo.nodo_Asignar,null,null,"");
-        Nodo nodo10 = new Nodo(TipoNodo.nodo_Declaracion,null,null,"");
-        Nodo nodo9 = new Nodo(TipoNodo.nodo_Identificador,null,null,"z");
-        Nodo nodo8 = new Nodo(TipoNodo.nodo_Digito,null,null,"300");
-        Nodo nodo7 = new Nodo(TipoNodo.nodo_Digito,null,null,"10");
-        Nodo nodo6 = new Nodo(TipoNodo.nodo_Identificador,null,null,"x");
-        Nodo nodo5 = new Nodo(TipoNodo.nodo_Digito,null,null,"50");
-        Nodo nodo4 = new Nodo(TipoNodo.nodo_Rest,null,null,"");
-        Nodo nodo3 = new Nodo(TipoNodo.nodo_Mult,null,null,"");
-        Nodo nodo2 = new Nodo(TipoNodo.nodo_Sum,null,null,"");
-        Nodo nodo1 = new Nodo(TipoNodo.nodo_Asignar,null,null,"");
-        Nodo nodo_raiz = new Nodo(TipoNodo.nodo_Declaracion,null,null,"");
+        Nodo nodo13 = new Nodo(TipoNodo.nodo_Identificador, null, null, "x");
+        Nodo nodo12 = new Nodo(TipoNodo.nodo_Digito, null, null, "50");
+        Nodo nodo11 = new Nodo(TipoNodo.nodo_Asignar, null, null, "");
+        Nodo nodo10 = new Nodo(TipoNodo.nodo_Declaracion, null, null, "");
+        Nodo nodo9 = new Nodo(TipoNodo.nodo_Identificador, null, null, "z");
+        Nodo nodo8 = new Nodo(TipoNodo.nodo_Digito, null, null, "300");
+        Nodo nodo7 = new Nodo(TipoNodo.nodo_Digito, null, null, "10");
+        Nodo nodo6 = new Nodo(TipoNodo.nodo_Identificador, null, null, "x");
+        Nodo nodo5 = new Nodo(TipoNodo.nodo_Digito, null, null, "50");
+        Nodo nodo4 = new Nodo(TipoNodo.nodo_Rest, null, null, "");
+        Nodo nodo3 = new Nodo(TipoNodo.nodo_Mult, null, null, "");
+        Nodo nodo2 = new Nodo(TipoNodo.nodo_Sum, null, null, "");
+        Nodo nodo1 = new Nodo(TipoNodo.nodo_Asignar, null, null, "");
+        Nodo nodo_raiz = new Nodo(TipoNodo.nodo_Declaracion, null, null, "");
         nodo_raiz.izquiendo = nodo10;
         nodo10.derecho = nodo1;
         nodo1.izquiendo = nodo6;
@@ -64,12 +64,12 @@ class AnalizadorSintacticoTest {
     @Test
     void correctitud_del_valor_nodo_arbol_fase_sintactica() {
         String lines[] = out.toString().split("\\r?\\n");
-        assertEquals("50",lines[14].split("\\s+")[1]);
+        assertEquals("50", lines[14].split("\\s+")[1]);
 
-
+    }
     // Test que compara el arbol creado manualmente con el generado en la prueba.
     @Test
-    void correctitud_del_arbol_generado_en_la_fase_sintactica() {
+    void correctitud_del_arbol_generado_en_la_fase_sintactica () {
         assertEquals("Declaracion   \r\n" +
                 "Declaracion   \r\n" +
                 ";\r\n" +
@@ -84,20 +84,20 @@ class AnalizadorSintacticoTest {
                 "Digito         10\r\n" +
                 "Resta         \r\n" +
                 "Id             x\r\n" +
-                "Digito         50\r\n",out.toString());
+                "Digito         50\r\n", out.toString());
     }
 
     // Test que compara el un nombre del nodo arbol creado manualmente con el generado en la prueba.
     @Test
-    void correctitud_del_nombre_nodo_arbol_fase_sintactica() {
+    void correctitud_del_nombre_nodo_arbol_fase_sintactica () {
         String lines[] = out.toString().split("\\r?\\n");
-        assertEquals("Digito",lines[14].split("\\s+")[0]);
+        assertEquals("Digito", lines[14].split("\\s+")[0]);
 
     }
 
     // Libera variables que se utiliza para probar la impresion en consola.
     @AfterEach
-    public void restoreInitialStreams() {
+    public void restoreInitialStreams () {
         System.setOut(originalOut);
         System.setErr(originalErr);
     }
