@@ -22,13 +22,13 @@ public class MiniCompilador {
 
                 AnalizadorLexico analizadorLexico = new AnalizadorLexico(codigo);
 
-                //analixadorLexico.imprimirTokens();
+                //analizadorLexico.imprimirTokens();
 
-                //System.out.println(analixadorLexico.obtenerTokens());
+
+                //System.out.println(analizadorLexico.obtenerTokens());
                 AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(analizadorLexico.obtenerTokens());
                 Nodo raiz = analizadorSintactico.parse();
-                //analisadorSintactico.imprimirArbol(raiz);
-
+                //analizadorSintactico.imprimirArbol(raiz);
                 AnalizadorSemantico analizadorSemantico = new AnalizadorSemantico(raiz);
                 analizadorSemantico.recorrerArbol(raiz);
                 //analizadorSemantico.getTablaSimbolos().imprimirTabla();

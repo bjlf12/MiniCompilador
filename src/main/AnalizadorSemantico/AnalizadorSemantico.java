@@ -4,12 +4,13 @@ import AnalizadorSintactico.Nodo;
 import AnalizadorSintactico.TipoNodo;
 
 public class AnalizadorSemantico {
+
     private TablaSimbolos tablaSimbolos;
     private Nodo nodo;
 
     public AnalizadorSemantico(Nodo nodo) {
-        this.tablaSimbolos = TablaSimbolos.obtenerInstancia();
         this.nodo = nodo;
+        this.tablaSimbolos = TablaSimbolos.obtenerInstancia();
     }
 
     public void recorrerArbol(Nodo nodo) {
