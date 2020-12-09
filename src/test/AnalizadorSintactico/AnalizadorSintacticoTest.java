@@ -63,6 +63,8 @@ class AnalizadorSintacticoTest {
 
 
 
+    // Test que compara el un valor del nodo arbol creado manualmente con el generado en la prueba.
+    @Test
     void correctitud_del_valor_nodo_arbol_fase_sintactica() {
 
         String lines[] = out.toString().split("\\r?\\n");
@@ -90,6 +92,23 @@ class AnalizadorSintacticoTest {
                 "Id             x\r\n" +
                 "Digito         50\r\n", out.toString());
     }
+
+
+    // Test que compara la estructura correcta de una expresion
+    @Test
+    void sentencia_correcta() {
+        String lines[] = out.toString().split("\\r?\\n");
+        assertEquals("Declaracion",lines[1].split("\\s+")[0]);
+        assertEquals(";",lines[2].split("\\s+")[0]);
+        assertEquals("Asignar",lines[3].split("\\s+")[0]);
+        assertEquals("Id",lines[4].split("\\s+")[0]);
+        assertEquals("Digito",lines[5].split("\\s+")[0]);
+    }
+
+
+    // Libera variables que se utiliza para probar la impresion en consola.
+    @AfterEach
+    public void restoreInitialStreams () {
 
 
     // Test que compara el inicio de la estructura de una expresion
@@ -150,6 +169,7 @@ class AnalizadorSintacticoTest {
     @AfterEach
 
     public void restoreInitialStreams () {
+
 
         System.setOut(originalOut);
         System.setErr(originalErr);
