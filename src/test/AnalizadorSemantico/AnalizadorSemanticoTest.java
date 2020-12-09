@@ -8,8 +8,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.util.Scanner;
 
+import static Analizadorlexico.AnalizadorLexico.error;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AnalizadorSemanticoTest {
@@ -35,6 +39,8 @@ class AnalizadorSemanticoTest {
         String lines[] = out.toString().split("\\r?\\n");
         assertEquals("325",lines[0]);
     }
+
+
 
     // Libera variables que se utilizan para probar la impresion en consola.
     @AfterEach
