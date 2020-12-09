@@ -1,0 +1,6 @@
+x = 100 ;
+z = 20
+w = z + x ;
+imprime x;
+imprime z;
+imprime w;

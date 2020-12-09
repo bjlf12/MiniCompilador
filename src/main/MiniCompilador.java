@@ -20,7 +20,7 @@ public class MiniCompilador {
                     codigo += scanner.nextLine() + "\n";
                 }
                 AnalizadorLexico analizadorLexico = new AnalizadorLexico(codigo);
-                //analixadorLexico.imprimirTokens();
+                //analizadorLexico.imprimirTokens();
 
                 //System.out.println(analixadorLexico.obtenerTokens());
                 AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(analizadorLexico.obtenerTokens());
