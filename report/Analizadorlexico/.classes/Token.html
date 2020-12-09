@@ -1,0 +1,143 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Token</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">Analizadorlexico</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Token (Analizadorlexico)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Token</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.3%
+  </span>
+  <span class="absValue">
+    (12/ 13)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Token$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.9%
+  </span>
+  <span class="absValue">
+    (13/ 14)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package Analizadorlexico;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;public class Token {
+<i>4</i>&nbsp;    public TipoToken tipoToken;
+<i>5</i>&nbsp;    public String valor;
+<i>6</i>&nbsp;    public int linea;
+<i>7</i>&nbsp;    public int pos;
+<i>8</i>&nbsp;
+<b class="fc"><i>9</i>&nbsp;    public Token(TipoToken tipoToken, String valor, int linea, int pos) {</b>
+<b class="fc"><i>10</i>&nbsp;        this.tipoToken = tipoToken;</b>
+<b class="fc"><i>11</i>&nbsp;        this.valor = valor;</b>
+<b class="fc"><i>12</i>&nbsp;        this.linea = linea;</b>
+<b class="fc"><i>13</i>&nbsp;        this.pos = pos;</b>
+<b class="fc"><i>14</i>&nbsp;    }</b>
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    @Override
+<i>17</i>&nbsp;    public String toString() {
+<b class="fc"><i>18</i>&nbsp;        String resultado = String.format(&quot;%5d  %5d %-15s&quot;, this.linea, this.pos, this.tipoToken);</b>
+<b class="fc"><i>19</i>&nbsp;        switch (this.tipoToken) {</b>
+<i>20</i>&nbsp;            case Digito:
+<b class="fc"><i>21</i>&nbsp;                resultado += String.format(&quot;  %4s&quot;, this.valor);</b>
+<b class="fc"><i>22</i>&nbsp;                break;</b>
+<i>23</i>&nbsp;            case Identificador:
+<b class="fc"><i>24</i>&nbsp;                resultado += String.format(&quot; %s&quot;, valor);</b>
+<i>25</i>&nbsp;                break;
+<i>26</i>&nbsp;        }
+<b class="fc"><i>27</i>&nbsp;        return resultado;</b>
+<i>28</i>&nbsp;    }
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    public String toString2() {
+<b class="nc"><i>31</i>&nbsp;        return String.format(&quot;%5d  %5d %-15s %s&quot;, this.linea, this.pos, this.tipoToken, this.valor);</b>
+<i>32</i>&nbsp;    }
+<i>33</i>&nbsp;    
+<i>34</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-12-08 22:42</div>
+</div>
+</body>
+</html>

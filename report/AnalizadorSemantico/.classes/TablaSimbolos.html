@@ -1,0 +1,175 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TablaSimbolos</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">AnalizadorSemantico</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TablaSimbolos (AnalizadorSemantico)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TablaSimbolos</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (8/ 10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75.6%
+  </span>
+  <span class="absValue">
+    (31/ 41)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package AnalizadorSemantico;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import AnalizadorSintactico.Nodo;
+<i>4</i>&nbsp;import AnalizadorSintactico.TipoNodo;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.util.HashMap;
+<i>7</i>&nbsp;import java.util.Map;
+<i>8</i>&nbsp;import java.util.Set;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;public class TablaSimbolos {
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;    private static Map&lt;String, Integer&gt; tabla;
+<i>13</i>&nbsp;    private static TablaSimbolos tablaSimbolos;
+<i>14</i>&nbsp;
+<b class="fc"><i>15</i>&nbsp;    private TablaSimbolos() {</b>
+<b class="fc"><i>16</i>&nbsp;        this.tabla = new HashMap&lt;&gt;();</b>
+<b class="fc"><i>17</i>&nbsp;    }</b>
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    public static TablaSimbolos obtenerInstancia() {
+<b class="fc"><i>20</i>&nbsp;        if (tablaSimbolos == null) {</b>
+<b class="fc"><i>21</i>&nbsp;            tablaSimbolos = new TablaSimbolos();</b>
+<i>22</i>&nbsp;        }
+<b class="fc"><i>23</i>&nbsp;        return tablaSimbolos;</b>
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    }
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    public void error(String mensaje, Nodo nodo) {
+<b class="nc"><i>28</i>&nbsp;        System.out.println(&quot;Error semantico: &quot; + nodo.tipoNodo + &quot; , ha ocurrido un error de tipo: &quot; + mensaje);</b>
+<b class="nc"><i>29</i>&nbsp;        System.exit(-1);</b>
+<b class="nc"><i>30</i>&nbsp;    }</b>
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    public Map&lt;String, Integer&gt; getTabla() {
+<b class="fc"><i>33</i>&nbsp;        return this.tabla;</b>
+<i>34</i>&nbsp;    }
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    private void ingresarId(String identificador, int valor) {
+<b class="fc"><i>37</i>&nbsp;        this.tabla.put(identificador, valor);</b>
+<b class="fc"><i>38</i>&nbsp;    }</b>
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;    public boolean existeIdentificador(String identificador) {
+<b class="nc"><i>41</i>&nbsp;        return this.tabla.containsKey(identificador);</b>
+<i>42</i>&nbsp;    }
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;    public void calcularValor(String identificador, Nodo nodo) {
+<b class="fc"><i>45</i>&nbsp;        ingresarId(identificador, recorrerNodo(nodo));</b>
+<b class="fc"><i>46</i>&nbsp;    }</b>
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    private int recorrerNodo(Nodo nodo) {
+<b class="fc"><i>49</i>&nbsp;        int valor = 0;</b>
+<b class="fc"><i>50</i>&nbsp;        if (nodo.tipoNodo == TipoNodo.nodo_Digito) {</b>
+<b class="fc"><i>51</i>&nbsp;            return Integer.parseInt(nodo.valor);</b>
+<b class="fc"><i>52</i>&nbsp;        } else if (nodo.tipoNodo == TipoNodo.nodo_Identificador) {</b>
+<i>53</i>&nbsp;            try {
+<b class="fc"><i>54</i>&nbsp;                return tabla.get(nodo.valor); //todo Verificar si existe el id.</b>
+<b class="nc"><i>55</i>&nbsp;            } catch (Exception e) {</b>
+<b class="nc"><i>56</i>&nbsp;                error(&quot;Identificador no definido&quot;, nodo);</b>
+<i>57</i>&nbsp;            }
+<i>58</i>&nbsp;        }
+<b class="fc"><i>59</i>&nbsp;        if (nodo.tipoNodo == TipoNodo.nodo_ParentesisDerecho) {</b>
+<b class="nc"><i>60</i>&nbsp;            recorrerNodo(nodo.izquiendo);</b>
+<i>61</i>&nbsp;        }
+<b class="fc"><i>62</i>&nbsp;        if (nodo.tipoNodo == TipoNodo.nodo_Div) {</b>
+<i>63</i>&nbsp;            try {
+<b class="fc"><i>64</i>&nbsp;                return recorrerNodo(nodo.izquiendo) / recorrerNodo(nodo.derecho);//todo Verificar si es division por cero.</b>
+<b class="nc"><i>65</i>&nbsp;            } catch (Exception e) {</b>
+<b class="nc"><i>66</i>&nbsp;                error(&quot;Divición por cero&quot;, nodo);</b>
+<i>67</i>&nbsp;            }
+<i>68</i>&nbsp;        }
+<b class="fc"><i>69</i>&nbsp;        if (nodo.tipoNodo == TipoNodo.nodo_Mult) {</b>
+<b class="fc"><i>70</i>&nbsp;            return recorrerNodo(nodo.izquiendo) * recorrerNodo(nodo.derecho);</b>
+<i>71</i>&nbsp;        }
+<b class="fc"><i>72</i>&nbsp;        if (nodo.tipoNodo == TipoNodo.nodo_Sum) {</b>
+<b class="fc"><i>73</i>&nbsp;            return recorrerNodo(nodo.izquiendo) + recorrerNodo(nodo.derecho);</b>
+<i>74</i>&nbsp;        }
+<b class="fc"><i>75</i>&nbsp;        if (nodo.tipoNodo == TipoNodo.nodo_Rest) {</b>
+<b class="fc"><i>76</i>&nbsp;            return recorrerNodo(nodo.izquiendo) - recorrerNodo(nodo.derecho);</b>
+<i>77</i>&nbsp;        }
+<b class="nc"><i>78</i>&nbsp;        return 0;</b>
+<i>79</i>&nbsp;    }
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;    public void imprimirTabla() {
+<b class="fc"><i>82</i>&nbsp;        Set&lt;String&gt; identificadores = tabla.keySet();</b>
+<b class="fc"><i>83</i>&nbsp;        for (String i : identificadores</b>
+<i>84</i>&nbsp;        ) {
+<b class="fc"><i>85</i>&nbsp;            System.out.println(&quot;|identificador: &quot; + i + &quot; | valor:&quot; + tabla.get(i) + &quot;|&quot;);</b>
+<b class="fc"><i>86</i>&nbsp;        }</b>
+<b class="fc"><i>87</i>&nbsp;    }</b>
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    public int obtenerId(String identificador) {
+<b class="fc"><i>90</i>&nbsp;        return tabla.get(identificador);</b>
+<i>91</i>&nbsp;    }
+<i>92</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-12-08 22:42</div>
+</div>
+</body>
+</html>
