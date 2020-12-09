@@ -24,7 +24,7 @@ class AnalizadorSintacticoTest {
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
 
-    // Se utiliza para crear el arbol de nodos que se utilizara para imprimirlo y probar.
+    // Se utiliza para crear el arbol de nodos que se utilizara para imprimirlo y probar en los tests.
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(out));
@@ -60,16 +60,20 @@ class AnalizadorSintacticoTest {
     }
 
 
-    // Test que compara el un valor del nodo arbol creado manualmente con el generado en la prueba.
+    // Test que compara el valor de un nodo del arbol creado manualmente con el generado en la prueba.
     @Test
-    void correctitud_del_valor_nodo_arbol_fase_sintactica() {
+    public void correctitud_del_valor_nodo_arbol_fase_sintactica() {
         String lines[] = out.toString().split("\\r?\\n");
         assertEquals("50", lines[14].split("\\s+")[1]);
 
     }
+
+
+    
     // Test que compara el arbol creado manualmente con el generado en la prueba.
     @Test
-    void correctitud_del_arbol_generado_en_la_fase_sintactica () {
+    public void correctitud_del_arbol_generado_en_la_fase_sintactica() {
+
         assertEquals("Declaracion   \r\n" +
                 "Declaracion   \r\n" +
                 ";\r\n" +
@@ -87,17 +91,37 @@ class AnalizadorSintacticoTest {
                 "Digito         50\r\n", out.toString());
     }
 
-    // Test que compara el un nombre del nodo arbol creado manualmente con el generado en la prueba.
+    // Test que compara el nombre de un nodo del arbol creado manualmente con el generado en la prueba.
     @Test
-    void correctitud_del_nombre_nodo_arbol_fase_sintactica () {
+
+    public void correctitud_del_nombre_nodo_arbol_fase_sintactica(){
+
         String lines[] = out.toString().split("\\r?\\n");
         assertEquals("Digito", lines[14].split("\\s+")[0]);
+
+    }
+    // Intenta crear un arbol con 5000 nodos y espera un StackOverFlowError.
+    @Test
+    public void prueba_estres_creacion_arbol(){
+        Assertions.assertThrows(StackOverflowError.class, () -> {
+            StringBuilder input = new StringBuilder(10000);
+            for(int i = 0; i<5000; i++){
+                input.append("a = 2;\n");
+            }
+            AnalizadorLexico analizadorLexico = new AnalizadorLexico(input.toString());
+            AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(analizadorLexico.obtenerTokens());
+            Nodo raiz = analizadorSintactico.parse();
+            analizadorSintactico.imprimirArbol(raiz);
+        });
+
 
     }
 
     // Libera variables que se utiliza para probar la impresion en consola.
     @AfterEach
-    public void restoreInitialStreams () {
+
+    public void restoreInitialStreams(){
+
         System.setOut(originalOut);
         System.setErr(originalErr);
     }
