@@ -1,6 +1,6 @@
 package AnalizadorSintactico;
 
-import Analizadorlexico.TipoToken;
+import Analizadorlexico.*;
 import Analizadorlexico.Token;
 
 import java.util.List;

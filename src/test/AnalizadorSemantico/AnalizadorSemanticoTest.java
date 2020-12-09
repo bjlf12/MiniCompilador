@@ -1,6 +1,7 @@
 package AnalizadorSemantico;
 
 import AnalizadorSintactico.AnalizadorSintactico;
+
 import AnalizadorSintactico.Nodo;
 import Analizadorlexico.AnalizadorLexico;
 import org.junit.jupiter.api.AfterEach;
@@ -15,25 +16,59 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 import static Analizadorlexico.AnalizadorLexico.error;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AnalizadorSemanticoTest {
 
-    //Variables para capturar la impresion en consola en los tests.
-    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
-    // Se utiliza para crear el arbol de nodos que se utilizara para imprimir los resultados de las operaciones.
+    private AnalizadorSemantico analizadorSemantico;
+    private Nodo raiz;
+
+
     @BeforeEach
-    public void setUp(){
-        System.setOut(new PrintStream(out));
-        String input = "a = 25;\n b = 300;\n c = a+b;\n d=b/a;\nimprime c;\n imprime d;";
-        AnalizadorLexico analizadorLexico = new AnalizadorLexico(input);
+    void setUp() {
+
+
+        AnalizadorLexico analizadorLexico = new AnalizadorLexico("a = 2; b = 5; c = b * a; d = 100 / c; f = (d * 50 + (5 * 8)) * (100 * (58 / d)); imprime f;");
         AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(analizadorLexico.obtenerTokens());
-        Nodo raiz = analizadorSintactico.parse();
-        AnalizadorSemantico analizadorSemantico = new AnalizadorSemantico(raiz);
+        raiz = analizadorSintactico.parse();
+        analizadorSemantico = new AnalizadorSemantico(raiz);
         analizadorSemantico.recorrerArbol(raiz);
+        System.setOut(new PrintStream(outContent));
+
     }
+
+    @AfterEach
+    void tearDown() {
+        System.setOut(originalOut);
+    }
+
+    @Test
+    void retornarColumnaIndentificadoresDadasLasEntradas() {
+
+        Set<String> identificadores = analizadorSemantico.getTablaSimbolos().getTabla().keySet();
+        for (String i : identificadores
+        ) {
+            System.out.println("identificador: " + i);
+        }
+        assertEquals("identificador: a\nidentificador: b\nidentificador: c\nidentificador: d\nidentificador: f\n",outContent.toString());
+    }
+
+    @Test
+    void retornarColumnaValoresDadasLasEntradas() {
+
+        Set<String> identificadores = analizadorSemantico.getTablaSimbolos().getTabla().keySet();
+        for (String i : identificadores
+        ) {
+            System.out.println("valor: " + analizadorSemantico.getTablaSimbolos().getTabla().get(i));
+        }
+        assertEquals("valor: 2\nvalor: 5\nvalor: 10\nvalor: 10\nvalor: 270000\n",outContent.toString());
+
+
     // Test que compara el valor del resultado de la suma generado por el codigo con el correcto.
     @Test
     public void correctitud_valor_resultado_suma_fase_semantica() {
@@ -76,5 +111,6 @@ class AnalizadorSemanticoTest {
     @AfterEach
     public void restoreInitialStreams() {
         System.setOut(originalOut);
+r
     }
 }

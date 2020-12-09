@@ -30,6 +30,7 @@ public class MiniCompilador {
                 analizadorSemantico.recorrerArbol(raiz);
                 //analizadorSemantico.getTablaSimbolos().imprimirTabla();
 
+
                 /**GeneradorCodigo generadorCodigo = new GeneradorCodigo();
                  generadorCodigo.generarCodigo(raiz);**/
             } catch (FileNotFoundException e) {
