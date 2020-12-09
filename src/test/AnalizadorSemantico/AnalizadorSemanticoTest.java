@@ -2,7 +2,6 @@ package AnalizadorSemantico;
 
 import AnalizadorSintactico.AnalizadorSintactico;
 
-
 import AnalizadorSintactico.Nodo;
 import Analizadorlexico.AnalizadorLexico;
 import org.junit.jupiter.api.AfterEach;
@@ -11,11 +10,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
+
+import java.util.Set;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.Scanner;
-
 import static Analizadorlexico.AnalizadorLexico.error;
 
 
@@ -24,28 +25,33 @@ import static org.junit.jupiter.api.Assertions.*;
 class AnalizadorSemanticoTest {
 
 
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    //Variables para capturar la impresion en consola en los tests.
+    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+    private AnalizadorSemantico analizadorSemantico;
+    private Nodo raiz;
     private final PrintStream originalOut = System.out;
 
-    private AnalizadorSemantico analizadorSemantico;
-
-    private Nodo raiz;
-
-
-
+    // Se utiliza para crear el arbol de nodos que se utilizara para imprimir los resultados de las operaciones.
     @BeforeEach
-    void setUp() {
-
-
-        AnalizadorLexico analizadorLexico = new AnalizadorLexico("a = 2; b = 5; c = b * a; d = 100 / c; f = (d * 50 + (5 * 8)) * (100 * (58 / d)); imprime f;");
+    public void setUp(){
+        System.setOut(new PrintStream(out));
+        String input = "a = 25;\n b = 300;\n c = a+b;\n d=a/b;\n e=a-b;\n imprime c;\n imprime d;\n imprime e;";
+        AnalizadorLexico analizadorLexico = new AnalizadorLexico(input);
         AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(analizadorLexico.obtenerTokens());
         raiz = analizadorSintactico.parse();
-        analizadorSemantico = new AnalizadorSemantico(raiz);
+        AnalizadorSemantico analizadorSemantico = new AnalizadorSemantico(raiz);
         analizadorSemantico.recorrerArbol(raiz);
-        System.setOut(new PrintStream(outContent));
-
-
+        System.setOut(new PrintStream(out));
     }
+
+    // Test que compara el valor del resultado de la resta generado por el codigo
+    @Test
+    public void correctitud_valor_resultado_resta_fase_semantica() {
+        String lines[] = out.toString().split("\\r?\\n");
+        assertEquals("-275",lines[2]);
+    }
+
+
 
     @AfterEach
     void tearDown() {
@@ -117,10 +123,13 @@ class AnalizadorSemanticoTest {
     }
 
 
+r
     // Libera variables que se utilizan para probar la impresion en consola.
     @AfterEach
     public void restoreInitialStreams() {
         System.setOut(originalOut);
 
+
     }
 }
+
