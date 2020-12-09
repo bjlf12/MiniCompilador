@@ -22,7 +22,7 @@ class AnalizadorSemanticoTest {
     @BeforeEach
     public void setUp(){
         System.setOut(new PrintStream(out));
-        String input = "a = 25;\n b = 300;\n c = a+b;\nimprime c;";
+        String input = "a = 25;\n b = 300;\n c = a+b;\n d=b/a;\nimprime c;\n imprime d;";
         AnalizadorLexico analizadorLexico = new AnalizadorLexico(input);
         AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(analizadorLexico.obtenerTokens());
         Nodo raiz = analizadorSintactico.parse();
@@ -34,6 +34,12 @@ class AnalizadorSemanticoTest {
     public void correctitud_valor_resultado_suma_fase_semantica() {
         String lines[] = out.toString().split("\\r?\\n");
         assertEquals("325",lines[0]);
+    }
+
+    @Test
+    public void correctitud_valor_resultado_division_fase_semantica() {
+        String lines[] = out.toString().split("\\r?\\n");
+        assertEquals("12",lines[1]);
     }
 
     // Libera variables que se utilizan para probar la impresion en consola.

@@ -64,8 +64,9 @@ class AnalizadorSintacticoTest {
     @Test
     void correctitud_del_valor_nodo_arbol_fase_sintactica() {
         String lines[] = out.toString().split("\\r?\\n");
-        assertEquals("50",lines[14].split("\\s+")[1]);
+        assertEquals("50", lines[14].split("\\s+")[1]);
 
+    }
 
     // Test que compara el arbol creado manualmente con el generado en la prueba.
     @Test
