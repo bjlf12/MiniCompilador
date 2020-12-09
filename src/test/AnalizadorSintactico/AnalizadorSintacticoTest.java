@@ -25,7 +25,8 @@ class AnalizadorSintacticoTest {
     private final PrintStream originalErr = System.err;
 
 
-    // Se utiliza para crear el arbol de nodos que se utilizara para imprimirlo y probar en los tests.
+    // Se utiliza para crear el arbol de nodos que se utilizara para imprimirlo y probar.
+
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(out));
@@ -62,9 +63,8 @@ class AnalizadorSintacticoTest {
 
 
 
-    // Test que compara el valor de un nodo del arbol creado manualmente con el generado en la prueba.
-    @Test
-    public void correctitud_del_valor_nodo_arbol_fase_sintactica() {
+    void correctitud_del_valor_nodo_arbol_fase_sintactica() {
+
         String lines[] = out.toString().split("\\r?\\n");
         assertEquals("50", lines[14].split("\\s+")[1]);
 
@@ -72,7 +72,8 @@ class AnalizadorSintacticoTest {
 
     // Test que compara el arbol creado manualmente con el generado en la prueba.
     @Test
-    public void correctitud_del_arbol_generado_en_la_fase_sintactica() {
+    void correctitud_del_arbol_generado_en_la_fase_sintactica () {
+
         assertEquals("Declaracion   \r\n" +
                 "Declaracion   \r\n" +
                 ";\r\n" +
@@ -89,6 +90,14 @@ class AnalizadorSintacticoTest {
                 "Id             x\r\n" +
                 "Digito         50\r\n", out.toString());
     }
+
+
+    // Test que compara el inicio de la estructura de una expresion
+    @Test
+    void inicio_expresion() {
+        String lines[] = out.toString().split("\\r?\\n");
+        assertEquals("Digito",lines[5].split("\\s+")[0]);
+        assertEquals("Digito",lines[9].split("\\s+")[0]);
 
 
     // Test para verificar que el nodo siguiente en una operacion es el correcto
@@ -131,6 +140,7 @@ class AnalizadorSintacticoTest {
             Nodo raiz = analizadorSintactico.parse();
             analizadorSintactico.imprimirArbol(raiz);
         });
+
 
 
 
