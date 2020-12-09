@@ -68,7 +68,6 @@ class AnalizadorSintacticoTest {
 
     }
 
-
     
     // Test que compara el arbol creado manualmente con el generado en la prueba.
     @Test
