@@ -9,8 +9,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.util.Scanner;
 
+import static Analizadorlexico.AnalizadorLexico.error;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AnalizadorSemanticoTest {
@@ -37,6 +41,7 @@ class AnalizadorSemanticoTest {
         assertEquals("325",lines[0]);
     }
 
+
     // Intenta crear un arbol con 5000 nodos y espera un StackOverFlowError.
     @Test
     public void pruebaEstresCon10000ValoresParatabladeSimbolos(){
@@ -57,9 +62,6 @@ class AnalizadorSemanticoTest {
         assertTrue(error);
 
     }
-
-
-
 
 
     // Libera variables que se utilizan para probar la impresion en consola.
