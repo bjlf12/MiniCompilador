@@ -106,40 +106,34 @@ class AnalizadorSintacticoTest {
     }
 
 
-    // Libera variables que se utiliza para probar la impresion en consola.
-    @AfterEach
-    public void restoreInitialStreams () {
 
 
     // Test que compara el inicio de la estructura de una expresion
     @Test
     void inicio_expresion() {
-        String lines[] = out.toString().split("\\r?\\n");
-        assertEquals("Digito",lines[5].split("\\s+")[0]);
-        assertEquals("Digito",lines[9].split("\\s+")[0]);
-
+            String lines[] = out.toString().split("\\r?\\n");
+            assertEquals("Digito", lines[5].split("\\s+")[0]);
+            assertEquals("Digito", lines[9].split("\\s+")[0]);
+    }
 
     // Test para verificar que el nodo siguiente en una operacion es el correcto
     @Test
-    void nodo_siguiente_correcto(){
+    void nodo_siguiente_correcto() {
         String lines[] = out.toString().split("\\r?\\n");
         int u = 0;
-        while (u < lines.length){
-            if (lines[u] == ";"){
-                assertEquals("Asignar",lines[u + 1].split("\\s+")[0]);
+        while (u < lines.length) {
+            if (lines[u] == ";") {
+                assertEquals("Asignar", lines[u + 1].split("\\s+")[0]);
+            } else if (lines[u] == "Asignar") {
+                assertEquals("Id", lines[u + 1].split("\\s+")[0]);
+            } else if (lines[u] == "Id") {
+                assertEquals("Digito", lines[u + 1].split("\\s+")[0]);
             }
-            else if (lines[u] == "Asignar"){
-                assertEquals("Id",lines[u + 1].split("\\s+")[0]);
-            }
-            else if (lines[u] == "Id"){
-                assertEquals("Digito",lines[u + 1].split("\\s+")[0]);
-            }
-            u ++;
+            u++;
         }
-
+    }
     // Test que compara el nombre de un nodo del arbol creado manualmente con el generado en la prueba.
     @Test
-
     public void correctitud_del_nombre_nodo_arbol_fase_sintactica(){
 
         String lines[] = out.toString().split("\\r?\\n");

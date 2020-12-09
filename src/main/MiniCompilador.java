@@ -20,6 +20,11 @@ public class MiniCompilador {
                     codigo += scanner.nextLine() + "\n";
                 }
 
+                StringBuilder input = new StringBuilder(10000);
+                for (int i = 0; i < 5000; i++) {
+                    input.append("a" + i + " = 2;\n");
+                }
+                System.out.println(input.toString());
                 AnalizadorLexico analizadorLexico = new AnalizadorLexico(codigo);
 
                 //analizadorLexico.imprimirTokens();

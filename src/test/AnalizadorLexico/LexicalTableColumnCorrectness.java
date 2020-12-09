@@ -1,17 +1,16 @@
 package AnalizadorLexico;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 import java.io.*;
 import java.util.Scanner;
 
-import static org.junit.Assert.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import Analizadorlexico.AnalizadorLexico;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class LexicalTableColumnCorrectness {
 
@@ -20,13 +19,13 @@ public class LexicalTableColumnCorrectness {
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
 
-    @Before
+    @BeforeEach
     public void setUpStreams() {
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }
 
-    @After
+    @AfterEach
     public void restoreStreams() {
         System.setOut(originalOut);
         System.setErr(originalErr);

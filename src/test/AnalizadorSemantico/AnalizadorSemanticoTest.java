@@ -17,11 +17,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.Scanner;
-<<<<<<< HEAD
+
 import java.util.Set;
 
-=======
->>>>>>> aa090ae3bce9534a0472cab0ae6118a76b62f031
 import static Analizadorlexico.AnalizadorLexico.error;
 
 
@@ -31,18 +29,13 @@ class AnalizadorSemanticoTest {
 
 
     //Variables para capturar la impresion en consola en los tests.
-    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private AnalizadorSemantico analizadorSemantico;
-<<<<<<< HEAD
 
-=======
-    private Nodo raiz;
     private final PrintStream originalOut = System.out;
->>>>>>> aa090ae3bce9534a0472cab0ae6118a76b62f031
 
     // Se utiliza para crear el arbol de nodos que se utilizara para imprimir los resultados de las operaciones.
     @BeforeEach
-<<<<<<< HEAD
     void setUp() {
         System.setOut(originalOut);
         System.setOut(new PrintStream(outContent));
@@ -52,35 +45,8 @@ class AnalizadorSemanticoTest {
         Nodo raiz = analizadorSintactico.parse();
         analizadorSemantico = new AnalizadorSemantico(raiz);
         analizadorSemantico.recorrerArbol(raiz);
-=======
-    public void setUp(){
-        System.setOut(new PrintStream(out));
-        String input = "a = 25;\n b = 300;\n c = a+b;\n d=a/b;\n e=a-b;\n imprime c;\n imprime d;\n imprime e;";
-        AnalizadorLexico analizadorLexico = new AnalizadorLexico(input);
-        AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(analizadorLexico.obtenerTokens());
-        raiz = analizadorSintactico.parse();
-        AnalizadorSemantico analizadorSemantico = new AnalizadorSemantico(raiz);
-        analizadorSemantico.recorrerArbol(raiz);
-        System.setOut(new PrintStream(out));
-    }
->>>>>>> aa090ae3bce9534a0472cab0ae6118a76b62f031
-
-    // Test que compara el valor del resultado de la resta generado por el codigo
-    @Test
-    public void correctitud_valor_resultado_resta_fase_semantica() {
-        String lines[] = out.toString().split("\\r?\\n");
-        assertEquals("-275",lines[2]);
     }
 
-<<<<<<< HEAD
-=======
-
-
-    @AfterEach
-    void tearDown() {
-        System.setOut(originalOut);
-    }
->>>>>>> aa090ae3bce9534a0472cab0ae6118a76b62f031
 
     @Test
     void retornarColumnaIndentificadoresDadasLasEntradas() {
@@ -154,21 +120,13 @@ class AnalizadorSemanticoTest {
     }
 
 
-r
+
     // Libera variables que se utilizan para probar la impresion en consola.
-
-
-
     @AfterEach
     public void restoreInitialStreams() {
         System.setOut(originalOut);
-
-
     }
-<<<<<<< HEAD
 
 }
-=======
-}
 
->>>>>>> aa090ae3bce9534a0472cab0ae6118a76b62f031
+
