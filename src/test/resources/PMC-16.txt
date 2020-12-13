@@ -1,0 +1,8 @@
+a = 25;
+b = 300;
+c = a+b;
+d=b/a;
+e=a-b;
+imprime c;
+imprime d;
+imprime e;

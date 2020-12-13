@@ -35,7 +35,7 @@ public class CapturaErrorFaseLexica {
     @Test
     public void ManejoError() throws FileNotFoundException {
 
-        File file = new File("prueba3.txt");
+        File file = new File("src/test/resources/PMC-4.txt");
         Scanner scanner = new Scanner(file);
         String codigo = " ";
         while (scanner.hasNext()) {
